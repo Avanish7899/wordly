@@ -1,0 +1,72 @@
+{
+    "en": {
+        "title": "Wordle Game",
+        "category_label": "Select Category:",
+        "guess_label": "Select Your Guess:",
+        "submit_guess": "Submit Guess",
+        "hint_button": "Hint",
+        "reset_button": "Reset Game",
+        "show_button": "Show Word",
+        "correct_guess": "Congratulations! You've guessed the word '{word}'!",
+        "incorrect_guess": "Incorrect guess! You have {remaining} attempts remaining.",
+        "game_over": "Game over! The word was '{word}'.",
+        "hint": "Hint: {hint}",
+        "no_hints": "No more hints available."
+    },
+    "hi": {
+        "title": "वर्डल गेम",
+        "category_label": "श्रेणी का चयन करें:",
+        "guess_label": "अपना अनुमान चुनें:",
+        "submit_guess": "अनुमान सबमिट करें",
+        "hint_button": "संकेत",
+        "reset_button": "खेल रीसेट करें",
+        "show_button": "शब्द दिखाएं",
+        "correct_guess": "बधाई हो! आपने शब्द '{word}' सही अनुमान लगाया!",
+        "incorrect_guess": "गलत अनुमान! आपके पास {remaining} प्रयास शेष हैं।",
+        "game_over": "खेल खत्म! शब्द था '{word}'।",
+        "hint": "संकेत: {hint}",
+        "no_hints": "कोई और संकेत उपलब्ध नहीं।"
+    },
+    "kn": {
+        "title": "ವರ್ಡ್ಲೆ ಆಟ",
+        "category_label": "ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+        "guess_label": "ನಿಮ್ಮ ಊಹೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:",
+        "submit_guess": "ಊಹೆಯನ್ನು ಸಲ್ಲಿಸಿ",
+        "hint_button": "ಸೂಚನೆ",
+        "reset_button": "ಆಟವನ್ನು ಮರುಹೊಂದಿಸಿ",
+        "show_button": "ಪದವನ್ನು ತೋರಿಸಿ",
+        "correct_guess": "ಅಭಿನಂದನೆಗಳು! ನೀವು '{word}' ಪದವನ್ನು ಊಹಿಸಿದ್ದಾರೆ!",
+        "incorrect_guess": "ತಪ್ಪು ಊಹೆ! ನಿಮಗೆ {remaining} ಪ್ರಯತ್ನಗಳು ಉಳಿದಿವೆ.",
+        "game_over": "ಆಟ ಮುಗಿಯಿತು! ಪದ '{word}'.",
+        "hint": "ಸೂಚನೆ: {hint}",
+        "no_hints": "ಯಾವುದೇ ಹೆಚ್ಚಿನ ಸೂಚನೆಗಳು ಲಭ್ಯವಿಲ್ಲ."
+    },
+    "ta": {
+        "title": "வர்ட்லே விளையாட்டு",
+        "category_label": "வகையைத் தேர்ந்தெடுக்கவும்:",
+        "guess_label": "உங்கள் ஊகத்தைத் தேர்ந்தெடுக்கவும்:",
+        "submit_guess": "ஊகம் சமர்ப்பிக்கவும்",
+        "hint_button": "குறிப்பு",
+        "reset_button": "விளையாட்டை மீட்டமைக்கவும்",
+        "show_button": "சொல்லை காட்டவும்",
+        "correct_guess": "வாழ்த்துக்கள்! நீங்கள் '{word}' சொல்லை ஊகித்தீர்கள்!",
+        "incorrect_guess": "தவறான ஊகம்! உங்களிடம் {remaining} முயற்சிகள் உள்ளன.",
+        "game_over": "விளையாட்டு முடிந்தது! சொல்லானது '{word}'.",
+        "hint": "குறிப்பு: {hint}",
+        "no_hints": "மேலும் குறிப்புகள் கிடைக்கவில்லை."
+    },
+    "ml": {
+        "title": "വേഡ്‌ലെ ഗെയിം",
+        "category_label": "വിഭാഗം തിരഞ്ഞെടുക്കുക:",
+        "guess_label": "നിങ്ങളുടെ കാല്പനികം തിരഞ്ഞെടുക്കുക:",
+        "submit_guess": "കാൽപനികം സമർപ്പിക്കുക",
+        "hint_button": "കുറിപ്പ്",
+        "reset_button": "ഗെയിം പുനഃക്രമീകരിക്കുക",
+        "show_button": "വാക്ക് കാണിക്കുക",
+        "correct_guess": "അഭിനന്ദനങ്ങൾ! നിങ്ങൾ '{word}' എന്ന വാക്ക് കൃത്യമായി കണ്ടുപിടിച്ചു!",
+        "incorrect_guess": "തെറ്റായ കാൽപനികം! നിങ്ങൾക്ക് {remaining} ശ്രമങ്ങൾ ബാക്കി.",
+        "game_over": "ഗെയിം അവസാനിച്ചു! വാക്ക് '{word}' ആയിരുന്നു.",
+        "hint": "കുറിപ്പ്: {hint}",
+        "no_hints": "ഇനിയൊരു കുറിപ്പുകളില്ല."
+    }
+}
