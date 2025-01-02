@@ -3,168 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle Game</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Choose a Category</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+            min-height: 100vh;
+            margin: 0;
+            padding-bottom: 80px; /* Space for button */
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #343a40;
+            font-size: 2.5rem;
+        }
+        .category-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
+        .category-item {
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .category-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .category-item img {
+            width: 100%;
+            height: 150px; /* Set a uniform height for all images */
+            object-fit: cover; /* Ensures the image scales proportionally to fit the container */
+        }
+        .category-item h3 {
+            background-color: #17a2b8;
+            color: #ffffff;
+            margin: 0;
+            padding: 10px;
+        }
+        #google_translate_element {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .bottom-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.2rem;
+            padding: 12px 24px;
+            background-color: #17a2b8;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .bottom-button:hover {
+            transform: scale(1.1) translateX(0); /* Ensure it enlarges but stays in place */
+            background-color: #138f9c; /* Slightly darker shade for hover */
+        }
+    </style>
 </head>
 <body>
-    <h1 id="title">Wordle Game</h1>
+    <div id="google_translate_element"></div>
 
-    <!-- Language Selection -->
-    <div>
-        <label for="language">Select Language:</label>
-        <select id="language">
-            <option value="en">English</option>
-            <option value="hi">Hindi</option>
-            <option value="kn">Kannada</option>
-            <option value="ta">Tamil</option>
-            <option value="ml">Malayalam</option>
-        </select>
-        <button id="apply_language">Apply</button>
+    <h1>Choose a Category</h1>
+    <div class="category-container">
+        <div class="category-item" onclick="location.href='/animal.html'">
+            <img src="/static/animals.jpg" alt="Animals">
+            <h3>Animals</h3>
+        </div>
+        <div class="category-item" onclick="location.href='/birds.html'">
+            <img src="/static/birds.jpg" alt="Birds">
+            <h3>Birds</h3>
+        </div>
+        <div class="category-item" onclick="location.href='/clothes.html'">
+            <img src="/static/cloths.jpg" alt="Clothes">
+            <h3>Clothes</h3>
+        </div>
+        <div class="category-item" onclick="location.href='/fruits.html'">
+            <img src="/static/fruits.jpg" alt="Fruits">
+            <h3>Fruits</h3>
+        </div>
+        <div class="category-item" onclick="location.href='/insects.html'">
+            <img src="/static/insects.jpg" alt="Insects">
+            <h3>Insects</h3>
+        </div>
+        <div class="category-item" onclick="location.href='/jobs.html'">
+            <img src="/static/jobs.jpg" alt="Jobs">
+            <h3>Jobs</h3>
+        </div>
+        <div class="category-item" onclick="location.href='/sports.html'">
+            <img src="/static/sports.jpg" alt="Sports">
+            <h3>Sports</h3>
+        </div>
+        <div class="category-item" onclick="location.href='/vegetables.html'">
+            <img src="/static/vegitables.jpg" alt="Vegetables">
+            <h3>Vegetables</h3>
+        </div>
+        <div class="category-item" onclick="location.href='/vehicles.html'">
+            <img src="/static/vehicles.jpg" alt="Vehicles">
+            <h3>Vehicles</h3>
+        </div>
+        <div class="category-item" onclick="location.href='/weather.html'">
+            <img src="/static/weather.jpg" alt="Weather">
+            <h3>Weather</h3>
+        </div>
     </div>
 
-    <!-- Category Selection -->
-    <div>
-        <label id="category_label" for="category">Select Your Category:</label>
-        <select id="category">
-            <option value="" disabled selected>Select your category</option>
-            <option value="animal">Animal</option>
-            <option value="bird">Bird</option>
-            <option value="flower">Flower</option>
-            <option value="vehicle">Vehicle</option>
-            <option value="fruit">Fruit</option>
-            <option value="vegetable">Vegetable</option>
-            <option value="colors">Colors</option>
-            <option value="clothes">Clothes</option>
-            <option value="weather">Weather</option>
-            <option value="jobs">Jobs</option>
-            <option value="sports">Sports</option>
-            <option value="body parts">Body Parts</option>
-            <option value="insects">Insects</option>
-        </select>
-    </div>
+    <button class="btn bottom-button" onclick="location.href='/'">Back To Rules</button>
 
-    <!-- Guess Selection -->
-    <div>
-        <label id="guess_label" for="guess">Select Your Guess:</label>
-        <select id="guess" disabled>
-            <option value="" disabled selected>Select a category first</option>
-        </select>
-    </div>
-
-    <!-- Buttons -->
-    <button id="submit_guess" disabled>Submit Guess</button>
-    <button id="hint_button">Hint</button>
-    <button id="reset_button">Reset Game</button>
-    <button id="show_button">Show Word</button>
-
-    <!-- Feedback Section -->
-    <div id="feedback"></div>
-
-    <script>
-        $(document).ready(function () {
-            // Handle language translation
-            $("#apply_language").click(function () {
-                const language = $("#language").val();
-                $.ajax({
-                    url: "/translate",
-                    method: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify({ language }),
-                    success: function (response) {
-                        $("#title").text(response.title);
-                        $("#category_label").text(response.category_label);
-                        $("#guess_label").text(response.guess_label);
-                        $("#submit_guess").text(response.submit_guess);
-                        $("#hint_button").text(response.hint_button);
-                        $("#reset_button").text(response.reset_button);
-                        $("#show_button").text(response.show_button);
-                    },
-                    error: function () {
-                        alert("Failed to load translations. Please try again.");
-                    }
-                });
-            });
-
-            // Populate subcategories when a category is selected
-            $("#category").change(function () {
-                const category = $(this).val();
-                if (category) {
-                    $.ajax({
-                        url: "/subcategories",
-                        method: "GET",
-                        data: { category },
-                        success: function (response) {
-                            const subcategories = response.subcategories;
-                            const guessDropdown = $("#guess");
-                            guessDropdown.prop("disabled", false).empty();
-                            guessDropdown.append(`<option value="" disabled selected>Select your guess</option>`);
-                            subcategories.forEach(sub => {
-                                guessDropdown.append(`<option value="${sub}">${sub}</option>`);
-                            });
-                            $("#submit_guess").prop("disabled", false);
-                        },
-                        error: function () {
-                            alert("Failed to load subcategories. Please try again.");
-                        }
-                    });
-                }
-            });
-
-            // Handle guess submission
-            $("#submit_guess").click(function () {
-                const language = $("#language").val();
-                const guess = $("#guess").val();
-                const category = $("#category").val();
-                $.ajax({
-                    url: "/guess",
-                    method: "POST",
-                    contentType: "application/json",
-                    data: JSON.stringify({ guess, category, language }),
-                    success: function (response) {
-                        let feedback = `<p>${response.message}</p>`;
-                        feedback += `<p>Similarity Score: ${response.similarity.toFixed(2)}</p>`;
-                        $("#feedback").html(feedback);
-                    }
-                });
-            });
-
-            // Handle hint requests
-            $("#hint_button").click(function () {
-                const language = $("#language").val();
-                $.ajax({
-                    url: "/hint",
-                    method: "GET",
-                    data: { language },
-                    success: function (response) {
-                        $("#feedback").append(`<p>${response.hint}</p>`);
-                    }
-                });
-            });
-
-            // Reset the game
-            $("#reset_button").click(function () {
-                $.ajax({
-                    url: "/reset",
-                    method: "POST",
-                    success: function (response) {
-                        $("#feedback").html(`<p>${response.message}</p>`);
-                        $("#guess").prop("disabled", true).empty();
-                        $("#submit_guess").prop("disabled", true);
-                    }
-                });
-            });
-
-            // Show the target word
-            $("#show_button").click(function () {
-                $.ajax({
-                    url: "/show",
-                    method: "GET",
-                    success: function (response) {
-                        $("#feedback").append(`<p>The word was: ${response.word}</p>`);
-                    }
-                });
-            });
-        });
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,hi,ta,kn,ml' // Restrict to Hindi, Tamil, Kannada, and Malayalam
+                },
+                'google_translate_element'
+            );
+        }
     </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>

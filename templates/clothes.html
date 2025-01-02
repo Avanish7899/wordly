@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothes Guess Game</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Set background image */
+        body {
+            background: url('{{ url_for('static', filename='cloths.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Google Translate Element */
+        #google_translate_element {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Main container */
+        .container {
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 400px;
+            margin: 50px auto;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Heading */
+        h1 {
+            font-size: 2em;
+            color: #007BFF; /* Blue color for the heading */
+            margin-bottom: 20px;
+        }
+
+        /* Input styling */
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        /* Button styling */
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 1em;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: #007BFF; /* Blue color for the buttons */
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: #0056b3; /* Darker blue on hover */
+            transform: scale(1.05); /* Slight scale-up effect */
+        }
+
+        /* Feedback section */
+        #feedback {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #555;
+            text-align: center;
+        }
+
+        /* Reset button outside the container */
+        .reset-outside {
+            margin-top: 20px;
+            padding: 10px;
+            width: 300px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            background: #007BFF; /* Same as other buttons */
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .reset-outside:hover {
+            background: #0056b3; /* Darker blue on hover */
+            transform: scale(1.05); /* Same animation as other buttons */
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Translate Element -->
+    <div id="google_translate_element"></div>
+
+    <div class="container">
+        <h1>Guess the Clothing Item</h1>
+
+        <!-- Guess Input -->
+        <div>
+            <label for="guess">Enter Your Guess:</label>
+            <input type="text" id="guess" placeholder="Type your guess here">
+        </div>
+
+        <!-- Buttons -->
+        <button id="submit_guess">Submit Guess</button>
+        <button id="hint_button">Hint</button>
+        <button id="reset_button">Reset Game</button>
+
+
+        <!-- Feedback Section -->
+        <div id="feedback"></div>
+    </div>
+
+    <!-- Reset Button Outside the Box -->
+    <button class="reset-outside" id="back_to_game">Back to Game</button>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement(
+                {
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,hi,kn,ta,ml' // Restrict to English, Hindi, Tamil, Kannada, and Malayalam
+                },
+                'google_translate_element'
+            );
+        }
+    </script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        $(document).ready(function () {
+            const category = "clothes"; // Set category to 'clothes'
+
+            // Handle guess submission
+            $("#submit_guess").click(function () {
+                const guess = $("#guess").val().trim();
+                if (!guess) {
+                    alert("Please enter a guess!");
+                    return;
+                }
+                $.ajax({
+                    url: "/guess",
+                    method: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({ guess: guess, category: category }),
+                    success: function (response) {
+                        if (response.success) {
+                            // Show confetti if the guess is correct
+                            confetti({
+                                particleCount: 150,
+                                spread: 70,
+                                origin: { y: 0.6 }
+                            });
+                        }
+                        let feedback = `<p>${response.message}</p>`;
+                        feedback += `<p>Similarity Score: ${response.similarity.toFixed(2)}</p>`;
+                        $("#feedback").html(feedback);
+                    },
+                    error: function () {
+                        alert("Failed to process your guess. Please try again.");
+                    }
+                });
+            });
+
+            // Handle hint requests
+            $("#hint_button").click(function () {
+                $.ajax({
+                    url: "/hint",
+                    method: "GET",
+                    success: function (response) {
+                        const hint = `<p>${response.hint}</p>`;
+                        $("#feedback").append(hint);
+                    },
+                    error: function () {
+                        alert("Failed to get a hint. Please try again.");
+                    }
+                });
+            });
+
+            // Handle reset game
+            $("#reset_button").click(function () {
+                $.ajax({
+                    url: "/reset",
+                    method: "POST",
+                    success: function () {
+                        $("#guess").val("");
+                        $("#feedback").html("");
+                    },
+                    error: function () {
+                        alert("Failed to reset the game. Please try again.");
+                    }
+                });
+            });
+
+            // Handle reset and redirect to game page
+            $("#back_to_game").click(function () {
+                $.ajax({
+                    url: "/reset",
+                    method: "POST",
+                    success: function () {
+                        window.location.href = "/game";
+                    },
+                    error: function () {
+                        alert("Failed to reset the game and navigate to the game page. Please try again.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
